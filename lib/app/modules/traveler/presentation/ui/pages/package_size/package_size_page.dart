@@ -5,7 +5,7 @@ import 'package:muvver_app/app/_design_system/text_styles/text_styles_const.dart
 import '../../../../../../_design_system/widgets/app_bar/custom_app_bar_with_arrow_and_cancel_widget.dart';
 import '../../../../../../core/shared/routers/routers.dart';
 import '../../../../domain/value_objects/package_size.dart';
-import '../../controllers/traveller_controller.dart';
+import '../../controllers/traveler_controller.dart';
 import 'component/package_size_options_component.dart';
 
 class PackageSizePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class PackageSizePage extends StatefulWidget {
 }
 
 class _PackageSizePageState extends State<PackageSizePage> {
-  final controller = GetIt.I.get<TravellerController>();
+  final controller = GetIt.I.get<TravelerController>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +45,7 @@ class _PackageSizePageState extends State<PackageSizePage> {
                         ),
                       ),
                     );
+                    controller.reset();
                   },
                 ),
                 const SizedBox(height: 24),
@@ -61,28 +62,30 @@ class _PackageSizePageState extends State<PackageSizePage> {
               ],
             ),
           ),
-          AnimatedBuilder(
-              animation: controller.packageWeight,
-              builder: (context, _) {
-                return Visibility(
-                  visible: controller.packageSize != null &&
-                      controller.packageSize != PackageSize.none,
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      color: Colors.white,
-                      height: 120,
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(children: [
+          ValueListenableBuilder(
+            valueListenable: controller.packageSize,
+            builder: (context, _, __) {
+              return Visibility(
+                visible: controller.packageSize.value != PackageSize.none,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    color: Colors.white,
+                    height: 120,
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      children: [
                         const SizedBox(height: 18),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            controller.setPackageSize(PackageSize.none);
+                            Navigator.pushNamed(context, '/package_weight');
+                          },
                           child: Text(
                             'Pular etapa',
                             style: TextStylesConst.titilliumWeb14BoldGray,
                           ),
                         ),
-                        const SizedBox(height: 16),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: ClipRRect(
@@ -113,11 +116,13 @@ class _PackageSizePageState extends State<PackageSizePage> {
                             ),
                           ),
                         ),
-                      ]),
+                      ],
                     ),
                   ),
-                );
-              })
+                ),
+              );
+            },
+          )
         ],
       ),
     );

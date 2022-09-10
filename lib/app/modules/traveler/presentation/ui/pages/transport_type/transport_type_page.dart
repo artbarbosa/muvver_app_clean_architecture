@@ -5,7 +5,7 @@ import 'package:muvver_app/app/modules/traveler/presentation/ui/pages/transport_
 
 import '../../../../../../_design_system/widgets/app_bar/custom_app_bar_with_close_widget.dart';
 import '../../../../../../core/shared/routers/routers.dart';
-import '../../controllers/traveller_controller.dart';
+import '../../controllers/traveler_controller.dart';
 
 class TransportTypePage extends StatefulWidget {
   const TransportTypePage({super.key});
@@ -15,7 +15,7 @@ class TransportTypePage extends StatefulWidget {
 }
 
 class _TransportTypePageState extends State<TransportTypePage> {
-  final controller = GetIt.I.get<TravellerController>();
+  final controller = GetIt.I.get<TravelerController>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +40,7 @@ class _TransportTypePageState extends State<TransportTypePage> {
                         ),
                       ),
                     );
+                    controller.reset();
                   },
                 ),
                 const SizedBox(height: 24),

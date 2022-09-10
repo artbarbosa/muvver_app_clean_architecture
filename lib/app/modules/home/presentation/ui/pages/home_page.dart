@@ -46,55 +46,56 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 15, top: 28),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 49, bottom: 8),
-                child: RichText(
-                  text: TextSpan(
-                    style: TextStylesConst.titilliumWeb20RegularGray,
-                    children: <TextSpan>[
-                      const TextSpan(text: 'Facilitando seus'),
-                      TextSpan(
-                        text: ' envios.',
-                        style: TextStylesConst.titilliumWeb20BoldGray,
-                      )
-                    ],
-                  ),
-                ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 15, top: 28),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Spacer(),
+            RichText(
+              text: TextSpan(
+                style: TextStylesConst.titilliumWeb20RegularGray,
+                children: <TextSpan>[
+                  const TextSpan(text: 'Facilitando seus'),
+                  TextSpan(
+                    text: ' envios.',
+                    style: TextStylesConst.titilliumWeb20BoldGray,
+                  )
+                ],
               ),
-              Text(
-                'Entregue ou envie.',
-                style: TextStylesConst.titilliumWeb16RegularGray6,
-              ),
-              CustomCardGradientWidget(
-                onTap: () {},
-                title: 'Remetente',
-                subtitle: 'Pra onde quer enviar seu objeto?',
-                image: AppImagesConst.box,
-              ),
-              const SizedBox(height: 24),
-              CustomCardGradientWidget(
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    Routers.generateRoutes(
-                      const RouteSettings(
-                        arguments: null,
-                        name: '/traveler',
-                      ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Entregue ou envie.',
+              style: TextStylesConst.titilliumWeb16RegularGray6,
+            ),
+            const Spacer(),
+            CustomCardGradientWidget(
+              onTap: () {},
+              title: 'Remetente',
+              subtitle: 'Pra onde quer enviar seu objeto?',
+              image: AppImagesConst.box,
+            ),
+            const SizedBox(height: 24),
+            CustomCardGradientWidget(
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  Routers.generateRoutes(
+                    const RouteSettings(
+                      arguments: null,
+                      name: '/traveler',
                     ),
-                  );
-                },
-                title: 'Viajante',
-                subtitle: 'Vai viajar pra onde?',
-                image: AppImagesConst.deliveryTruck,
-              ),
-            ],
-          ),
+                  ),
+                );
+              },
+              title: 'Viajante',
+              subtitle: 'Vai viajar pra onde?',
+              image: AppImagesConst.deliveryTruck,
+            ),
+            const Spacer(),
+            const Spacer(),
+          ],
         ),
       ),
     );

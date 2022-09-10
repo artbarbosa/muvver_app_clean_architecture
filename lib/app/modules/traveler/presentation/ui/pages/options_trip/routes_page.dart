@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:muvver_app/app/_design_system/widgets/text_form_field/custom_text_form_field_widget.dart';
 
 import '../../../../../../_design_system/text_styles/text_styles_const.dart';
 import '../../../../../../core/shared/utils/mask_text_input_formatter.dart';
-import '../../controllers/traveller_controller.dart';
+import '../../controllers/traveler_controller.dart';
 
 class RoutesPage extends StatefulWidget {
   const RoutesPage({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class RoutesPage extends StatefulWidget {
 }
 
 class _RoutesPageState extends State<RoutesPage> {
-  final controller = GetIt.I.get<TravellerController>();
+  final controller = GetIt.I.get<TravelerController>();
 
   final _formKey = GlobalKey<FormState>();
   final dateFormatter = MaskTextInputFormatter(mask: '##/##/####');
@@ -49,11 +48,11 @@ class _RoutesPageState extends State<RoutesPage> {
                           inputFormatters: [dateFormatter],
                           textEditingController: controller.dataControllerStart,
                           readOnly: true,
-                          labelText: 'Data de chegada',
-                          hintText: 'Data de chegada',
+                          labelText: 'Data de partida',
+                          hintText: 'Data de partida',
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return null;
+                              return 'data inválida';
                             }
                             final components = value.split("/");
                             if (components.length == 3) {
@@ -77,9 +76,9 @@ class _RoutesPageState extends State<RoutesPage> {
                             DateTime? picked = await showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
-                              lastDate: DateTime.now(),
-                              firstDate: DateTime.now()
-                                  .subtract(const Duration(days: 365 * 90)),
+                              lastDate:
+                                  DateTime.now().add(const Duration(days: 365)),
+                              firstDate: DateTime.now(),
                               builder: (context, child) => Theme(
                                 data: ThemeData(
                                   primaryColor: const Color(0xFF24B96E),
@@ -117,7 +116,7 @@ class _RoutesPageState extends State<RoutesPage> {
                           hintText: 'Data de chegada',
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return null;
+                              return 'data inválida';
                             }
                             final components = value.split("/");
                             if (components.length == 3) {
@@ -141,9 +140,9 @@ class _RoutesPageState extends State<RoutesPage> {
                             DateTime? picked = await showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
-                              lastDate: DateTime.now(),
-                              firstDate: DateTime.now()
-                                  .subtract(const Duration(days: 365 * 90)),
+                              lastDate:
+                                  DateTime.now().add(const Duration(days: 365)),
+                              firstDate: DateTime.now(),
                               builder: (context, child) => Theme(
                                 data: ThemeData(
                                   primaryColor: const Color(0xFF24B96E),
@@ -181,6 +180,12 @@ class _RoutesPageState extends State<RoutesPage> {
                       readOnly: false,
                       labelText: 'Cidade de origem',
                       hintText: 'Cidade de origem',
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Cidade inválida';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   const SizedBox(height: 31),
@@ -192,6 +197,12 @@ class _RoutesPageState extends State<RoutesPage> {
                       readOnly: false,
                       labelText: 'Cidade de destino',
                       hintText: 'Cidade de destino',
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Cidade inválida';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   const SizedBox(height: 40),
@@ -241,7 +252,11 @@ class _RoutesPageState extends State<RoutesPage> {
                 shadowColor: const Color(0xff222222),
                 child: InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, '/package_size');
+                    if (_formKey.currentState != null) {
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.pushNamed(context, '/package_size');
+                      }
+                    }
                   },
                   child: Container(
                     height: 48,

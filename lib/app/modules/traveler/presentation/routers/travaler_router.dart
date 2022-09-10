@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muvver_app/app/modules/traveler/presentation/ui/pages/delivery_price/delivery_price_page.dart';
-import 'package:muvver_app/app/modules/traveler/presentation/ui/pages/message/message_page.dart';
+import 'package:muvver_app/app/modules/traveler/presentation/ui/pages/message/containers/message_container.dart';
 import 'package:muvver_app/app/modules/traveler/presentation/ui/pages/mid_point/mid_point_page.dart';
 import 'package:muvver_app/app/modules/traveler/presentation/ui/pages/options_trip/container/options_trip_container.dart';
 import 'package:muvver_app/app/modules/traveler/presentation/ui/pages/package_size/package_size_page.dart';
@@ -42,7 +42,7 @@ class TraveleRouter extends StatelessWidget {
         if (settings.name == '/delivery_price') {
           return MaterialPageRoute(
             builder: (context) {
-              return const DeliveryPricePage();
+              return DeliveryPricePage();
             },
           );
         }
@@ -63,7 +63,7 @@ class TraveleRouter extends StatelessWidget {
         if (settings.name == '/message') {
           return MaterialPageRoute(
             builder: (context) {
-              return const MessagePage();
+              return MessageContainer();
             },
           );
         }

@@ -5,7 +5,7 @@ import 'package:muvver_app/app/modules/traveler/domain/value_objects/package_siz
 import '../../../../../../../_design_system/consts/app_colors_const.dart';
 import '../../../../../../../_design_system/consts/app_icons_const.dart';
 import '../../../../../../../_design_system/widgets/list_tile/custom_list_tile_with_subtitle_widget.dart';
-import '../../../controllers/traveller_controller.dart';
+import '../../../controllers/traveler_controller.dart';
 
 class PackageSizeOptionsComponent extends StatefulWidget {
   const PackageSizeOptionsComponent({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class PackageSizeOptionsComponent extends StatefulWidget {
 
 class _PackageSizeOptionsComponentState
     extends State<PackageSizeOptionsComponent> {
-  final controller = GetIt.I.get<TravellerController>();
+  final controller = GetIt.I.get<TravelerController>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +31,7 @@ class _PackageSizeOptionsComponentState
             trailing: Radio<PackageSize>(
               activeColor: ColorsConst.green,
               value: PackageSize.envelope,
-              groupValue: controller.packageSize,
+              groupValue: controller.packageSize.value,
               onChanged: (PackageSize? value) {
                 setState(
                   () {
@@ -49,7 +49,7 @@ class _PackageSizeOptionsComponentState
             trailing: Radio<PackageSize>(
               activeColor: ColorsConst.green,
               value: PackageSize.book,
-              groupValue: controller.packageSize,
+              groupValue: controller.packageSize.value,
               onChanged: (PackageSize? value) {
                 setState(
                   () {
@@ -67,7 +67,7 @@ class _PackageSizeOptionsComponentState
             trailing: Radio<PackageSize>(
               activeColor: ColorsConst.green,
               value: PackageSize.shoeBox,
-              groupValue: controller.packageSize,
+              groupValue: controller.packageSize.value,
               onChanged: (PackageSize? value) {
                 setState(
                   () {
@@ -85,7 +85,7 @@ class _PackageSizeOptionsComponentState
             trailing: Radio<PackageSize>(
               activeColor: ColorsConst.green,
               value: PackageSize.schoolbag,
-              groupValue: controller.packageSize,
+              groupValue: controller.packageSize.value,
               onChanged: (PackageSize? value) {
                 setState(
                   () {
@@ -103,7 +103,7 @@ class _PackageSizeOptionsComponentState
             trailing: Radio<PackageSize>(
               activeColor: ColorsConst.green,
               value: PackageSize.bigSuitcase,
-              groupValue: controller.packageSize,
+              groupValue: controller.packageSize.value,
               onChanged: (PackageSize? value) {
                 setState(
                   () {
@@ -121,7 +121,7 @@ class _PackageSizeOptionsComponentState
             trailing: Radio<PackageSize>(
               activeColor: ColorsConst.green,
               value: PackageSize.bigBox,
-              groupValue: controller.packageSize,
+              groupValue: controller.packageSize.value,
               onChanged: (PackageSize? value) {
                 setState(
                   () {

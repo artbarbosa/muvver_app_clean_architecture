@@ -8,7 +8,6 @@ class HttpClientMock implements IHttpService {
   }
 
   @override
-  Future<void> post(String path, {Map<String, dynamic>? queryParameters}) {
-    throw UnimplementedError();
-  }
+  Future<void> post(String path,
+      {Map<String, dynamic>? queryParameters}) async {}
 }

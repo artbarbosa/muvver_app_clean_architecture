@@ -6,7 +6,7 @@ import '../../../modules/traveler/domain/usecases/add_traveler_usecase.dart';
 import '../../../modules/traveler/external/datasources/traveler_datadource.dart';
 import '../../../modules/traveler/infra/datasource/traveler_datasource_interface.dart';
 import '../../../modules/traveler/infra/repositories/traveler_repository.dart';
-import '../../../modules/traveler/presentation/ui/controllers/traveller_controller.dart';
+import '../../../modules/traveler/presentation/ui/controllers/traveler_controller.dart';
 import '../services/remote/http_client_mock.dart';
 import '../services/remote/http_client_service_interface.dart';
 import '../ui/controllers/custom_bottom_navigation_bar_controller.dart';
@@ -26,8 +26,8 @@ class Inject {
     getIt.registerLazySingleton<IAddTravelerUseCase>(
         () => AddTravelerUseCase(getIt()));
 
-    getIt.registerLazySingleton<TravellerController>(
-      () => TravellerController(addTravelerUseCase: getIt()),
+    getIt.registerLazySingleton<TravelerController>(
+      () => TravelerController(addTravelerUseCase: getIt()),
     );
     getIt.registerLazySingleton<CustomBottomNavigationBarController>(
       () => CustomBottomNavigationBarController(0, PageController()),

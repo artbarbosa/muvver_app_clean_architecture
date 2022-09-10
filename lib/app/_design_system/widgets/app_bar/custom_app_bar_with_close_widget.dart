@@ -9,10 +9,12 @@ class CustomAppBarWithCloseWidget extends StatelessWidget {
     this.onClose,
     required this.title,
     required this.subtitle,
+    this.height = 151,
   });
   final void Function()? onClose;
   final String title;
   final String subtitle;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class CustomAppBarWithCloseWidget extends StatelessWidget {
       margin: const EdgeInsets.all(0),
       elevation: 3,
       child: Container(
-        height: 151,
+        height: height,
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         decoration: const BoxDecoration(
           gradient: LinearGradient(

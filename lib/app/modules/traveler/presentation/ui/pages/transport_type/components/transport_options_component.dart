@@ -5,7 +5,7 @@ import '../../../../../../../_design_system/consts/app_colors_const.dart';
 import '../../../../../../../_design_system/consts/app_icons_const.dart';
 import '../../../../../../../_design_system/widgets/list_tile/custom_list_tile_widget.dart';
 import '../../../../../domain/value_objects/transport_types.dart';
-import '../../../controllers/traveller_controller.dart';
+import '../../../controllers/traveler_controller.dart';
 
 class TransportOptionsComponent extends StatefulWidget {
   TransportOptionsComponent({
@@ -18,7 +18,7 @@ class TransportOptionsComponent extends StatefulWidget {
 }
 
 class _TransportOptionsComponentState extends State<TransportOptionsComponent> {
-  final controller = GetIt.I.get<TravellerController>();
+  final controller = GetIt.I.get<TravelerController>();
 
   @override
   Widget build(BuildContext context) {

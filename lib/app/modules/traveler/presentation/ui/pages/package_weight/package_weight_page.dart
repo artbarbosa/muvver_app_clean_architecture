@@ -5,7 +5,7 @@ import '../../../../../../_design_system/text_styles/text_styles_const.dart';
 import '../../../../../../_design_system/widgets/app_bar/custom_app_bar_with_arrow_and_cancel_widget.dart';
 import '../../../../../../core/shared/routers/routers.dart';
 import '../../../../domain/value_objects/package_weight.dart';
-import '../../controllers/traveller_controller.dart';
+import '../../controllers/traveler_controller.dart';
 import 'components/package_weight_options_component.dart';
 
 class PackageWeightPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class PackageWeightPage extends StatefulWidget {
 }
 
 class _PackageWeightPageState extends State<PackageWeightPage> {
-  final controller = GetIt.I.get<TravellerController>();
+  final controller = GetIt.I.get<TravelerController>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class _PackageWeightPageState extends State<PackageWeightPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomAppBarWithArrowAndCancelBarWidget(
-                  height: 100,
+                  height: 110,
                   title: 'Qual o peso do volume?',
                   subtitle: 'Ser um Muvver',
                   onBack: () {
@@ -45,6 +45,8 @@ class _PackageWeightPageState extends State<PackageWeightPage> {
                         ),
                       ),
                     );
+
+                    controller.reset();
                   },
                 ),
                 const SizedBox(height: 24),
@@ -61,56 +63,94 @@ class _PackageWeightPageState extends State<PackageWeightPage> {
               ],
             ),
           ),
-          Visibility(
-            visible: controller.packageWeight != null &&
-                controller.packageWeight != PackageWeight.none,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                color: Colors.white,
-                height: 120,
-                width: MediaQuery.of(context).size.width,
-                child: Column(children: [
-                  const SizedBox(height: 18),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Pular etapa',
-                      style: TextStylesConst.titilliumWeb14BoldGray,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(3)),
-                      child: Material(
-                        color: const Color(0xFF16A45C),
-                        elevation: 5,
-                        shadowColor: const Color(0xff222222),
-                        child: InkWell(
-                          onTap: () {
+          ValueListenableBuilder(
+              valueListenable: controller.packageWeight,
+              builder: (context, _, __) {
+                return Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    color: Colors.white,
+                    height: 120,
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 18),
+                        TextButton(
+                          onPressed: () {
+                            controller.setPackageWeight(PackageWeight.none);
                             Navigator.pushNamed(context, '/delivery_price');
                           },
-                          child: Container(
-                            height: 48,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                            ),
-                            child: Text(
-                              'Avançar',
-                              style: TextStylesConst.titilliumWeb16BoldWhite,
+                          child: Text(
+                            'Pular etapa',
+                            style: TextStylesConst.titilliumWeb14BoldGray,
+                          ),
+                        ),
+                        Visibility(
+                          visible: controller.packageWeight.value !=
+                              PackageWeight.none,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(3)),
+                              child: Material(
+                                color: const Color(0xFF16A45C),
+                                elevation: 5,
+                                shadowColor: const Color(0xff222222),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, '/delivery_price');
+                                  },
+                                  child: Container(
+                                    height: 48,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(3),
+                                    ),
+                                    child: Text(
+                                      'Avançar',
+                                      style: TextStylesConst
+                                          .titilliumWeb16BoldWhite,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                        Visibility(
+                          visible: controller.packageWeight.value ==
+                              PackageWeight.none,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(3)),
+                              child: Material(
+                                color: Colors.grey,
+                                elevation: 5,
+                                child: Container(
+                                  height: 48,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
+                                  child: Text(
+                                    'Avançar',
+                                    style:
+                                        TextStylesConst.titilliumWeb16BoldWhite,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ]),
-              ),
-            ),
-          )
+                );
+              })
         ],
       ),
     );
